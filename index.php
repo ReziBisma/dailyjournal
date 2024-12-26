@@ -157,7 +157,7 @@ include "koneksi.php";
                         <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#galery">Gallery</a>
+                        <a class="nav-link" href="#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#artikel">Artikel</a>
@@ -228,37 +228,59 @@ include "koneksi.php";
 <!-- article end -->
 
 
-    <section id="gallery" class="py-5 p-5 bg-primary-subtle">
-      <div class="container">
-          <h2 class="text-center font-weight-bold mb-4">Galeri</h2>
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-              </ol>
-              <div class="carousel-inner">
-                  <div class="carousel-item active">
-                      <img src="img/Zero.jpg" class="d-block w-100" alt="Gambar 1" style="height: 400px; object-fit: cover;">
-                  </div>
-                  <div class="carousel-item">
-                      <img src="img/xgeats.jpg" class="d-block w-100" alt="Gambar 2" style="height: 400px; object-fit: cover;">
-                  </div>
-                  <div class="carousel-item">
-                      <img src="img/Kaget.jpg" class="d-block w-100" alt="Gambar 3" style="height: 400px; object-fit: cover;">
-                  </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+<section id="gallery" class="py-5 p-5 bg-primary-subtle">
+    <div class="container">
+        <h2 class="text-center font-weight-bold mb-4">Galeri</h2>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <?php
+                include "koneksi.php";
+
+                // Query untuk mengambil semua data gallery
+                $sql = "SELECT * FROM gallery";
+                $result = $conn->query($sql);
+
+                // Loop untuk membuat tombol indikator
+                $isActive = true;
+                $slideIndex = 0;
+                while ($row = $result->fetch_assoc()) {
+                    $activeClass = $isActive ? 'active' : '';
+                    echo "<button type='button' data-bs-target='#carouselExampleIndicators' data-bs-slide-to='$slideIndex' class='$activeClass' aria-current='true' aria-label='Slide " . ($slideIndex + 1) . "'></button>";
+                    $isActive = false;
+                    $slideIndex++;
+                }
+                ?>
+            </ol>
+            <div class="carousel-inner">
+                <?php
+                // Reset result pointer
+                $result->data_seek(0);
+
+                // Loop untuk menampilkan gambar dari database
+                $isActive = true;
+                while ($row = $result->fetch_assoc()) {
+                    $gambar = $row['gambar']; // Nama file gambar dari database
+                    $judul = $row['judul'];   // Judul gallery
+                    $activeClass = $isActive ? 'active' : '';
+                    echo "
+                        <div class='carousel-item $activeClass'>
+                            <img src='img/$gambar' class='d-block w-100' alt='$judul' style='height: 400px; object-fit: cover;'>
+                        </div>";
+                    $isActive = false;
+                }
+                ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-              </button>
-          </div>
-      </div>
-  </section>
+            </button>
+        </div>
+    </div>
+</section>
 
     <section id="schedule" class="text-center p-5">
       <div class="container">
