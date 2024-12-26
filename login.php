@@ -113,6 +113,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit" class="btn btn-info btn-block">Login</button>
                 </div>
             </form>
+            <!-- Tombol Back -->
+            <div class="mt-3 text-center">
+                <a href="index.php" class="btn btn-secondary">Back</a>
+            </div>
         </div>
     </div>
 
