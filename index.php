@@ -154,13 +154,13 @@ include "koneksi.php";
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-dark">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#artikel">Artikel</a>
+                        <a class="nav-link" href="#article">Artikel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#schedule">Jadwal</a>
