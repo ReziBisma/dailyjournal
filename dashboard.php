@@ -27,6 +27,19 @@ if ($hasil2) {
     $jumlah_gallery = 0; // Fallback jika query gagal
     echo "Error pada query gallery: " . $conn->error;
 }
+
+// Query untuk mengambil data user
+$sql3 = "SELECT * FROM user";
+$hasil3 = $conn->query($sql3);
+
+// Hitung jumlah baris data user
+if ($hasil3) {
+    $jumlah_user = $hasil3->num_rows;
+} else {
+    $jumlah_user = 0; // Fallback jika query gagal
+    echo "Error pada query user: " . $conn->error;
+}
+
 ?>
 
 <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center pt-4">
@@ -56,6 +69,22 @@ if ($hasil2) {
                     <div class="p-3">
                         <span class="badge rounded-pill text-bg-danger fs-2">
                             <?php echo $jumlah_gallery; ?>
+                        </span>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="col">
+        <div class="card border border-danger mb-3 shadow" style="max-width: 18rem;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="p-3">
+                        <h5 class="card-title"><i class="bi bi-person"></i> User</h5> 
+                    </div>
+                    <div class="p-3">
+                        <span class="badge rounded-pill text-bg-danger fs-2">
+                            <?php echo $jumlah_user; ?>
                         </span>
                     </div> 
                 </div>
